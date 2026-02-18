@@ -32,19 +32,15 @@ export function Calc() {
 
         if (operator === "+") {
              summa = num1 + num2
-        
         }
         if (operator === "-") {
             summa = num1 - num2
-        
         }
         if (operator === "/") {
             summa = num1 / num2
-            
         }
         if (operator === "*") {
-            summa = num1 * num2
-           
+            summa = num1 * num2   
         }
         setDisplay(String(summa))
     }
@@ -57,11 +53,6 @@ export function Calc() {
     return <>
         <div className="main-box">
             <div className="screen">
-                {/* <input type="text"
-                    className='width100'
-                    value={record}
-                    readOnly>
-                </input> */}
                 <input type="text"
                     className='width100'
                     value={display}
@@ -85,9 +76,7 @@ export function Calc() {
                     <span onClick={() => operatorClick("*")}>*</span>
                     <span onClick={sumClick}>=</span>
                     <span onClick={resetClick}>C</span>
-                    {/* {num1 ? <p>{num1}</p> : <p></p>}
-                    {operator ? <p>{operator}</p> : <p></p>}
-                    {num2 ? <p>{num2}</p> : <p></p>} */}
+               
 
                 </div>
             </div>
