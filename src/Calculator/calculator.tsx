@@ -1,80 +1,57 @@
 import { useState } from 'react'
 import './calculator.css'
 
+type Operator = "+" | "-" | "*" | "/"
+
 export function Calc() {
-    const [display, setDisplay] = useState('')
-    const [num1, setNum1] = useState(0)
-    const [num2, setNum2] = useState(0)
-    const [summa, setSumma] = useState(0)
-    const [operator, setOperator] = useState<string | null>(null)
+    const [display, setDisplay] = useState('');
+    const [num1, setNum1] = useState(0);
+    const [operator, setOperator] = useState<Operator | null>(null);
+
 
     const numClick = (n: number) => {
         setDisplay(display => display + n)
-        // setRecord(display => display + n)
     }
 
-    const operatorClick = (o: string) => {
-        if (display === "") {
-            return
-        }
-        setNum1(Number(display))
+    const operatorClick = (oper: string) => {
+        if (!display) return
 
-        if (o === "+") {
-            // setRecord(display => display + "+")
-            setOperator("+")
-        }
-        if (o === "-") {
-            // setRecord(display => display + "-")
-            setOperator("-")
-        }
-        if (o === "/") {
-            // setRecord(display => display + "/")
-            setOperator("/")
-        }
-        if (o === "*") {
-            // setRecord(display => display + "*")
-            setOperator("*")
-        }
-
+        setOperator(oper as Operator)
         setDisplay("")
+        setNum1(Number(display))
     }
 
     const sumClick = () => {
-        if (num1 === null || operator === null) {
-            console.log("error")
+        if (num1 === null || operator === null || !display) {
+            console.error("error")
+            console.error(num1,operator,display)
             return
         }
-
-        setNum2(Number(display))
+        const num2 = Number(display)
+        let summa= 0
 
         if (operator === "+") {
-            let summa = num1 + Number(display)
-            setDisplay(String(summa))
-            setSumma(summa)
+             summa = num1 + num2
+        
         }
         if (operator === "-") {
-            let summa = num1 + Number(display)
-            setDisplay(String(summa))
-            setSumma(summa)
+            summa = num1 - num2
+        
         }
         if (operator === "/") {
-            let summa = num1 + Number(display)
-            setDisplay(String(summa))
-            setSumma(summa)
+            summa = num1 / num2
+            
         }
         if (operator === "*") {
-            let summa = num1 + Number(display)
-            setDisplay(String(summa))
-            setSumma(summa)
+            summa = num1 * num2
+           
         }
-
+        setDisplay(String(summa))
     }
     const resetClick = () => {
-        setNum1(0)
-        setNum2(0)
-        setSumma(0)
-        setDisplay("")
-        setOperator("")
+        setNum1(0);
+        setDisplay("");
+        setOperator(null);
     }
 
     return <>
@@ -111,9 +88,8 @@ export function Calc() {
                     {/* {num1 ? <p>{num1}</p> : <p></p>}
                     {operator ? <p>{operator}</p> : <p></p>}
                     {num2 ? <p>{num2}</p> : <p></p>} */}
-                  
+
                 </div>
-                {summa ? <span>{num1} {operator} {num2} = {summa} </span> : <span/>}
             </div>
 
         </div>
