@@ -13,55 +13,41 @@ export function Calc() {
         setDisplay(display => display + n)
     }
 
-    const operatorClick = (oper: string) => {
+    const operatorClick = (oper:  Operator) => {
         if (!display) return;
 
-        setOperator(oper as Operator);
+        setOperator(oper);
         setDisplay("")
         setNum1(Number(display))
     }
 
     const sumClick = () => {
-        if (num1 === null || operator === null || !display) {
+        if (operator === null || !display) {
             console.error("error")
-            console.error(num1, operator, display)
             return
         }
         const num2 = Number(display)
         let summa = 0
-        switch(operator) {
+        switch (operator) {
             case '+':
                 summa = num1 + num2;
-              break;
-              case '-':
+                break;
+            case '-':
                 summa = num1 - num2;
-              break;
-              case '/':
-                summa = num1 + num2;
-              break;
-              case '*':
-                summa = num1 + num2;
-              break;
-              case '%':
-            //     summa = num1 + num2;
-            //   break;
-            // default:
-              // код, якщо нічого не підійшло
-          }
-        // if (operator === "+") {
-        //     summa = num1 + num2;
-        // }
-        // if (operator === "-") {
-        //     summa = num1 - num2;
-        // }
-        // if (operator === "/") {
-        //     summa = num1 / num2;
-        // }
-        // if (operator === "*") {
-        //     summa = num1 * num2;
-        // }
+                break;
+            case '/':
+                summa = num1 / num2;
+                break;
+            case '*':
+                summa = num1 * num2;
+                break;
+            case '%':
+                summa = num1 % num2;
+                break;
+        }
 
-        setDisplay(String(summa))
+        setDisplay(String(summa));
+        setOperator(null);
     }
     const resetClick = () => {
         setNum1(0);
@@ -97,7 +83,7 @@ export function Calc() {
                     <span onClick={() => numClick(2)}>2</span>
                     <span onClick={() => numClick(3)}>3</span>
                     <span onClick={() => operatorClick("+")}>+</span>
-                   
+
                     <span onClick={resetClick}>C</span>
                     <span onClick={() => numClick(0)}>0</span>
                     <span onClick={() => numClick(".")}>.</span>
